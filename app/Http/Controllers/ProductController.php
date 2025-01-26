@@ -22,11 +22,12 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
         ]);
 
         Product::create($request->all());
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success', 'Product created successfully!');
     }
 }
